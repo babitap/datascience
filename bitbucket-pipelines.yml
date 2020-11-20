@@ -1,0 +1,73 @@
+image: node:10.15.3
+
+pipelines:
+  default:
+    - step:
+        script:
+          - echo "This script runs on all branches that don't have any specific pipeline assigned in 'branches'."
+  branches:
+    develop:
+      - step:
+          name: Build
+          caches:
+            - node
+          script:
+            - cd frontend
+            - yarn install
+            - NODE_OPTIONS=--max_old_space_size=3072   npm run build:dev 
+      - step:
+          name: Build and Deploy
+          deployment: dev
+          trigger: manual
+          caches:
+            - node
+          size: 2x  
+          script:
+            - cd frontend
+            - yarn install
+            - NODE_OPTIONS=--max_old_space_size=3072  npm run build:dev
+            - pipe: microsoft/azure-storage-deploy:2.0.0
+              variables:
+                SOURCE: 'dist/*'
+                DESTINATION: 'https://$AZURE_STORAGE_ACCOUNT_DEV.blob.core.windows.net/\\\$web/'
+                DESTINATION_SAS_TOKEN: $AZURE_STORAGE_SAS_TOKEN_DEV
+                EXTRA_ARGS: '--recursive=true'
+                DEBUG: 'true'
+          after-script:
+            - cat /root/.npm/_logs/*
+            
+    master:
+      - step:
+          name: Build
+          caches:
+            - node
+          script:
+            - cd frontend
+            - yarn install
+            - NODE_OPTIONS=--max_old_space_size=4096  npm run build 
+      - step:
+          name: Build and Deploy
+          deployment: prod
+          trigger: manual
+          caches:
+            - node
+          size: 2x  
+          script:
+            - cd frontend
+            - yarn install
+            - NODE_OPTIONS=--max_old_space_size=4096  npm run build
+            - pipe: microsoft/azure-storage-deploy:2.0.0
+              variables:
+                SOURCE: 'dist/*'
+                DESTINATION: 'https://$AZURE_STORAGE_ACCOUNT_PROD.blob.core.windows.net/\\\$web/'
+                DESTINATION_SAS_TOKEN: $AZURE_STORAGE_SAS_TOKEN_PROD
+                EXTRA_ARGS: '--recursive=true'
+                DEBUG: 'false'
+          after-script:
+            - cat /root/.npm/_logs/*
+
+            
+definitions:
+  services:
+    docker:
+      memory: 4096  # extend memory for docker-in-docker from 1GB to 3GB                

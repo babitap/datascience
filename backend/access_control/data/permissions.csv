@@ -1,0 +1,5 @@
+name,codename,is_findex,is_findex_all,is_accessible
+Can add group,add_group,1,1,1
+Can change group,change_group,1,1,1
+Can delete group,delete_group,0,1,1
+Can view group,view_group,0,1,1

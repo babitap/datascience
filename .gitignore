@@ -1,0 +1,53 @@
+###########################################################
+## For Django app ( backend )
+###########################################################
+
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.Rapp.history
+.DS_Store
+metastore_db
+*.log
+.ipynb_checkpoints
+.pyc
+
+# ignore user-spencific files from Pycharm
+.idea
+
+venv
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+###########################################################
+## For Vue.js app ( frontend )
+###########################################################
+.DS_Store
+node_modules
+/dist
+
+# local env files
+#.env.local
+#.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+education_vuejs_webpack_orig
+###########################################################
+## For IDE
+###########################################################
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.vs
+*.bak

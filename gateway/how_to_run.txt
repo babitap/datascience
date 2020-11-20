@@ -1,0 +1,16 @@
+run in powershell and python 3.6
+--------------------------------
+# remove a restriction in powershell ... it is a stupid default setting in powershell
+Set-ExecutionPolicy RemoteSigned
+
+# create a virtual environment if not existing
+py -3 -m venv venv 
+
+# go to virtual environment 
+.\venv\Scripts\activate
+
+# please note, requirements.txt has been moved to the top directory due to a deployment issue
+pip install -r ../requirements.txt   
+
+# run server on localhost 
+python manage.py runserver 127.0.0.1:8000
