@@ -26,7 +26,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = False if 'DJANGO_DEBUG' in os.environ and os.environ['DJANGO_DEBUG'] in ['False', 'FALSE', 'F'] else True
 
 
-# The allowed host which behavior as the web server
+# The allowed host whi ch behavior as the web server
 ALLOWED_HOSTS = [ 'localhost', '127.0.0.1', 'findex-ds-portal-api-test.azurewebsites.net', 'findex-ds-portal-api.azurewebsites.net', '10.3.90.204' ]
 if 'DJANGO_ALLOWED_HOST' in os.environ:
     ALLOWED_HOSTS.append( os.environ['DJANGO_ALLOWED_HOST'] )
@@ -51,7 +51,7 @@ PBI_SCOPE = [os.environ.get('PBI_SCOPE','')]
 ENVIRONMENT     = os.environ.get('DOWNLOAD_ENVIRONMENT', '')
 STORAGE_ACCOUNT = os.environ.get('DOWNLOAD_STORAGE_ACCOUNT','')
 STORAGE_KEY     = os.environ.get('DOWNLOAD_STORAGE_KEY','')
-USERMAIL_TABLE  = os.environ.get('INVITE_USERMAIL_TABLE','')
+USERMAIL_TABLE  = os.environ.get('INVITE_USERMAIL_T ABLE','')
 DOWNLOAD_TABLE  = os.environ.get('DOWNLOAD_LOG_TABLE','')
 
 # Application definition
@@ -65,15 +65,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'api',
     'graphene_django',
-    'corsheaders',                              ## ALERT!!  CORS!!!
+    'corsheaders',                               ## ALERT!!  CORS!!!
     'access_control'
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',    ## ALERT!!  CORS!!!
+    'corsheaders.middleware .CorsMiddleware',    ## ALERT!!  CORS!!!
     'django.middleware.common.CommonMiddleware',
 
-    'django.middleware.security.SecurityMiddleware',
+    'django.middlewar e.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -89,7 +89,7 @@ ROOT_URLCONF = 'data_science_portal_api.urls'
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'BACKEND ': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -123,7 +123,7 @@ DATABASES = {
     'public_data': {
         'ENGINE': os.environ['EXTERNAL_DBENGINE'],
         'NAME': os.environ['EXTERNAL_DBNAME'],
-        'USER': os.environ['EXTERNAL_DBUSER'],
+         'USER': os.environ['EXTERNAL_DBUSER'],
         'PASSWORD': os.environ['EXTERNAL_DBPASS'],
         'HOST': os.environ['EXTERNAL_DBHOST'],
         'OPTIONS': {
@@ -133,7 +133,7 @@ DATABASES = {
     'student_profile': {
         'ENGINE': os.environ['STUDENT_DBENGINE'],
         'NAME': os.environ['STUDENT_DBNAME'],
-        'USER': os.environ['STUDENT_DBUSER'],
+        ' USER': os.environ['STUDENT_DBUSER'],
         'PASSWORD': os.environ['STUDENT_DBPASS'],
         'HOST': os.environ['STUDENT_DBHOST'],
         'OPTIONS': {
@@ -207,7 +207,7 @@ STATICFILES_DIRS = [
  ]
 
 STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'
-DEFAULT_FILE_STORAGE = 'whaariki_portal.custom_azure.AzureMediaStorage'
+DEFAULT_FILE_STORAGE = 'data_science_portal_api.custom_azure.AzureMediaStorage'
 
 AZURE_ACCOUNT_NAME = 'devportalaps'
 AZURE_ACCOUNT_KEY = 'Z2kB3mV+aIz+6F5pghdaOUxWaToxkFkSqn92119SRJl8xwUp2xq+iJYGE1hBpVsKwMAGa7R+bUR0ymqKoavvfw=='
