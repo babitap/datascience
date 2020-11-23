@@ -1,4 +1,4 @@
-# Findex Education Portal Product (v04)
+
 
 ## A project using JWT Tokens, Vue.js(frontend) and Django-Rest(backend).
 
