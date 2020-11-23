@@ -43,6 +43,7 @@ $Env:DOWNLOAD_STORAGE_ACCOUNT   = "batchdatasciencedev"
 $Env:DOWNLOAD_STORAGE_KEY       = "G6VcEwo2mFVPhBNIE0domk6Kwm5KyTW496t+dTLawwZYHVrflvegNI3TFL9u14OpBVUkJ6TBAf7yWMEW+KMC/g=="
 $Env:DOWNLOAD_LOG_TABLE         = "batchtaskslogsdev"
 $Env:INVITE_USERMAIL_TABLE      = "usermailtabledev"
+$Env:DOWNLOAD_CONTAINER_NAME    = "batchtasksoutput"
 
 $Env:SECRET_KEY  = "^sj6_uyj%3#hzh*vc09+es=jb(^$%)*wh)qq=32#-$kgg_*v$u"
 
@@ -53,3 +54,5 @@ $Env:AZURE_ACCOUNT_KEY = 'Z2kB3mV+aIz+6F5pghdaOUxWaToxkFkSqn92119SRJl8xwUp2xq+iJ
 $Env:AZURE_CUSTOM_DOMAIN = 'devportalaps.blob.core.windows.net'
 $Env:AZURE_LOCATION = '$web'
 $Env:AZURE_CONTAINER = '$web'
+
+$Env:AZURE_STORAGE_CONNECTION_STRING = 'DefaultEndpointsProtocol=https;AccountName=batchdatasciencedev;AccountKey=G6VcEwo2mFVPhBNIE0domk6Kwm5KyTW496t+dTLawwZYHVrflvegNI3TFL9u14OpBVUkJ6TBAf7yWMEW+KMC/g==;EndpointSuffix=core.windows.net'

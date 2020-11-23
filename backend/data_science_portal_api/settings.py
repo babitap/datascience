@@ -53,7 +53,7 @@ STORAGE_ACCOUNT = os.environ.get('DOWNLOAD_STORAGE_ACCOUNT','')
 STORAGE_KEY     = os.environ.get('DOWNLOAD_STORAGE_KEY','')
 USERMAIL_TABLE  = os.environ.get('INVITE_USERMAIL_T ABLE','')
 DOWNLOAD_TABLE  = os.environ.get('DOWNLOAD_LOG_TABLE','')
-
+CONTAINER_NAME  = os.environ.get('DOWNLOAD_CONTAINER_NAME','')
 # Application definition
 
 INSTALLED_APPS = [
@@ -203,17 +203,33 @@ AUTHENTICATION_BACKENDS = (
 )
 
 STATICFILES_DIRS = [
-     os.path.join(BASE_DIR, 'profile_images'),
+     os.path.join(BASE_DIR, 'reports'),
  ]
 
 STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'
 DEFAULT_FILE_STORAGE = 'data_science_portal_api.custom_azure.AzureMediaStorage'
 
-AZURE_ACCOUNT_NAME = 'devportalaps'
-AZURE_ACCOUNT_KEY = 'Z2kB3mV+aIz+6F5pghdaOUxWaToxkFkSqn92119SRJl8xwUp2xq+iJYGE1hBpVsKwMAGa7R+bUR0ymqKoavvfw=='
-STATIC_LOCATION = '$web'
-AZURE_LOCATION = '$web'
-AZURE_CONTAINER = '$web'
+# AZURE_ACCOUNT_NAME = 'devportalaps'
+# AZURE_ACCOUNT_KEY = 'Z2kB3mV+aIz+6F5pghdaOUxWaToxkFkSqn92119SRJl8xwUp2xq+iJYGE1hBpVsKwMAGa7R+bUR0ymqKoavvfw=='
+# STATIC_LOCATION = '$web'
+# AZURE_LOCATION = '$web'
+# AZURE_CONTAINER = '$web'
 
-AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
-STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
+# AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
+# STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
+
+# AzureStorage Settings
+AZURE_STORAGE_ACCOUNT = "batchdatasciencedev"
+AZURE_STORAGE_KEY = "G6VcEwo2mFVPhBNIE0domk6Kwm5KyTW496t+dTLawwZYHVrflvegNI3TFL9u14OpBVUkJ6TBAf7yWMEW+KMC/g=="
+AZURE_STORAGE_CONTAINER = "batchtasksoutput" # statics will use this container
+
+# Static Settings
+# STATICFILES_STORAGE = "<my_project>.storage.AzureStorage"
+STATICFILES_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+STATIC_URL = "http://batchdatasciencedev.blob.core.windows.net/batchtasksoutput/"
+
+# # Media Settings
+# MEDIA_URL = 'http://storage.pepperdeck.com/<media_container>/'
+
+DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+STATICFILES_STORAGE = 'custom_storage.custom_azure.PublicAzureStorage'
