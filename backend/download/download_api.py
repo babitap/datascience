@@ -71,36 +71,7 @@ class downloadDocument(validate_request, UserPassesTestMixin, TemplateView):
             #if task.SASExpireTime and task.SASExpireTime:
             print(task.FileName)
             print(task.SASUrl)
-            blob_url_dict[task.FileName] = task.SASUrl
-
-          # Initialize the connection to Azure storage account
-
-          # [START download_a_blob]
-          connection_string = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
-          blob_service_client = BlobServiceClient.from_connection_string(self.connection_string)
-
-         # Instantiate a new ContainerClient
-          container_client = blob_service_client.get_container_client("myblockcontainersync")
-           # Create new Container in the service
-            container_client.create_container()
-
-            # Instantiate a new BlobClient
-            blob_client = container_client.get_blob_client("myblockblob")
-            with open(DEST_FILE, "wb") as my_blob:
-                download_stream = blob_client.download_blob()
-                my_blob.write(download_stream.readall())
-            # [END download_a_blob]
-
-
-
-          self.blob_service_client =  BlobServiceClient.from_connection_string(MY_CONNECTION_STRING)
-          self.my_container = self.blob_service_client.get_container_client(MY_BLOB_CONTAINER)
-
-          my_blobs = self.my_container.list_blobs()
-          for blob in my_blobs:
-            print(blob.name)
-            bytes = self.my_container.get_blob_client(blob).download_blob().readall()
-            self.save_blob(blob.name, bytes)
+            blob_url_dict[task.FileName] = task.FileName 
 
           return JsonResponse(data={'blob_url':blob_url_dict})
 
@@ -146,6 +117,33 @@ class downloadDocument(validate_request, UserPassesTestMixin, TemplateView):
         except Exception as e:
             return JsonResponse(data={'message':repr(e)})
         """
+
+      def getfile():
+          # Initialize the connection to Azure storage account
+          # [START download_a_blob]
+        connection_string = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
+        blob_service_client = BlobServiceClient.from_connection_string(self.connection_string)
+
+         # Instantiate a new ContainerClient
+        container_client = blob_service_client.get_container_client("myblockcontainersync")
+          # Create new Container in the service
+        container_client.create_container()
+          # Instantiate a new BlobClient
+        blob_client = container_client.get_blob_client("myblockblob")
+        with open(DEST_FILE, "wb") as my_blob:
+          download_stream = blob_client.download_blob()
+          my_blob.write(download_stream.readall())
+          # [END download_a_blob]
+
+          # blob_service_client =  BlobServiceClient.from_connection_string(MY_CONNECTION_STRING)
+          # my_container = self.blob_service_client.get_container_client(MY_BLOB_CONTAINER)
+
+          # my_blobs = self.my_container.list_blobs()
+          # for blob in my_blobs:
+          #   print(blob.name)
+          #   bytes = self.my_container.get_blob_client(blob).download_blob().readall()
+          #   self.save_blob(blob.name, bytes)
+        
 def download_from_container(self, resource_group_name, account_name, container_name, files):
         try:
             secret_key = meta_lib.AzureMeta().list_storage_keys(resource_group_name, account_name)[0]
@@ -170,3 +168,26 @@ def GetBlobUrl():
     # print url
     # return 'https://' + <your_account_name> + '.blob.core.windows.net/' + <your_container_name> + '/<your_blob_name>?' + sas_token
       return 'https://' + settings.STORAGE_ACCOUNT + '.blob.core.windows.net/' +  settings.CONTAINER_NAME + '?' + sas_token
+
+def getdownloadfiles()
+    connection_string = 'DefaultEndpointsProtocol=https;AccountName=batchdatasciencedev;AccountKey=G6VcEwo2mFVPhBNIE0domk6Kwm5KyTW496t+dTLawwZYHVrflvegNI3TFL9u14OpBVUkJ6TBAf7yWMEW+KMC/g==;EndpointSuffix=core.windows.net'  
+    blob_service_client =  BlobServiceClient.from_connection_string(connection_string)
+    my_container = blob_service_client.get_container_client('batchtasksoutput')
+
+    my_blobs = my_container.list_blobs()
+    for blob in my_blobs:
+      print(blob.name)
+      bytes = my_container.get_blob_client(blob).download_blob().readall()
+      #print(bytes)
+      #save_blob(blob.name, bytes)
+      blob_url_dict = {}
+      for task in tasks:
+          #if task.SASExpireTime and task.SASExpireTime:
+          print(task.FileName)
+          print(task.SASUrl)
+          blob_url_dict[task.FileName] = task.FileName 
+          
+        return JsonResponse(data={'blob_url':blob_url_dict})
+
+
+    #return HttpResponse("Hello, world. You're at the polls index.")
